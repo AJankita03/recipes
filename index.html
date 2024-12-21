@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthy Recipes</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(90deg, #1d1e1d, #404140);
+            color: rgb(248, 227, 239);
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links li a {
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: #441101;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 130vh;
+			font-family: 'Times New Roman', Times, serif;
+            background: url("img.jpeg") no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: rgb(68, 4, 4);
+            text-shadow: 2px 5px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: fadeIn 5s ease-in-out;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background: #4b150b;
+            color: #efcece;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .btn:hover {
+            background: #6c6b6a;
+            transform: scale(1.05);
+        }
+
+        /* Recipe Section */
+        .recipes {
+            padding: 50px 20px;
+            background: #383838;
+        }
+
+        .recipes h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            color: #ffdbd9;
+        }
+
+        .recipe-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: rgb(230, 229, 229);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 330px;
+            object-fit: fill;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            color: #073b08;
+            margin: 15px;
+        }
+
+        .card p {
+            padding: 0 15px 20px;
+        }
+
+        /* About Section */
+        .about {
+            padding: 50px 20px;
+            background: linear-gradient(90deg, #5c5b5b, #c1a4a4,  #d0a3a3,  #7b7979);
+            color: rgb(15, 14, 14);
+            text-align: center;
+        }
+
+        .about h2 {
+            margin-bottom: 20px;
+        }
+
+        .about p {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 50px 20px;
+            background: #f4f4f4;
+            text-align: center;
+        }
+
+        .contact h2 {
+            margin-bottom: 20px;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #4CAF50;
+            color: white;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+		 /* Button styling */
+		 button {
+			margin-top: 5cap;
+      padding: 0px 0px;
+      font-size: 0px;
+      border: none;
+      border-radius: 0px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+   
+
+    /* Popup box styling */
+    .popup-box1 {
+      display: none; /* Hidden by default */
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; /* Bigger width */
+      padding: 30px; /* Increased padding */
+      background-color: rgb(46, 45, 45);
+      box-shadow: 15 4px 18px rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    /* Overlay styling */
+    .overlay1 {
+      display: none; /* Hidden by default */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+
+    .popup-box2 {
+      display: none; /* Hidden by default */
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; /* Bigger width */
+      padding: 30px; /* Increased padding */
+      background-color: rgb(46, 45, 45);
+      box-shadow: 15 4px 18px rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    /* Overlay styling */
+    .overlay2 {
+      display: none; /* Hidden by default */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+
+    .popup-box3 {
+      display: none; /* Hidden by default */
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; /* Bigger width */
+      padding: 30px; /* Increased padding */
+      background-color: rgb(46, 45, 45);
+      box-shadow: 15 4px 18px rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    /* Overlay styling */
+    .overlay3 {
+      display: none; /* Hidden by default */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+
+    /* Close button styling */
+    .close-btn1 {
+      margin-top: 10px;
+      padding: 5px 10px;
+      font-size: 14px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4d0008;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .close-btn1:hover {
+      background-color: #3f2a2c;
+    }
+    .close-btn2 {
+      margin-top: 10px;
+      padding: 5px 10px;
+      font-size: 14px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4d0008;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .close-btn2:hover {
+      background-color: #3f2a2c;
+    }
+    .close-btn3 {
+      margin-top: 10px;
+      padding: 5px 10px;
+      font-size: 14px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4d0008;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .close-btn3:hover {
+      background-color: #3f2a2c;
+    }
+    /* Reference link styling */
+    .reference-links {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .reference-links a {
+      display: block;
+      margin: 5px 0;
+      color: #f9c4d9;
+      text-decoration: none;
+	  align-items: center;
+	  text-align: center;
+      font-size: 15px;
+    }
+
+    .reference-links a:hover {
+      text-decoration: underline;
+    }
+	
+	
+    </style>
+</head>
+<body>
+	
+    <header>
+        <nav class="navbar">
+            <div class="logo">HealthyBites</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#recipes">Recipes</a></li>
+                <li><a href="#about">About Us</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>HealthyBites</h1>
+            <p>Explore delicious and healthy recipes tailored for your lifestyle.</p>
+            <a href="#recipes" class="btn">Discover Recipes</a>
+        </div>
+    </section>
+
+    <section id="recipes" class="recipes">
+        <h2>Our Featured Recipe Types</h2>
+        <div class="recipe-cards">
+            <div class="card">
+                <img src="1.jpg" alt="Salad Bowl">
+                <h3>Breakfast & Snacks recipes</h3>
+                <p>A refreshing mix of leafy greens, nuts, and many more ingredients for your tummy, which is healthy and yummy.</p>
+                <button class="btn", id="open1" onclick="viewRecipe('salad')">View Recipe</button>
+            </div>
+            <div class="card">
+                <img src="2.jpeg" alt="Fruit Smoothie">
+                <h3>Full Diet Recipes</h3>
+                <p>A healthy mixture of different nutrition sources for your full diet.</p>
+                <button class="btn" , id="open2" onclick="viewRecipe('smoothie')">View Recipe</button>
+            </div>
+            <div class="card">
+                <img src="3.jpg" alt="Vegetable Soup">
+                <h3>Snack and Smoothie Recipes</h3>
+                <p>Some sweet, salty and comforting recipes which are pleasant to eyes and body.</p>
+                <button class="btn" , id="open3" onclick="viewRecipe('soup')">View Recipe</button>
+            </div>
+        </div>
+    </section>
+	
+    <section id="about" class="about">
+        <h2>About Us</h2>
+        <p>At HealthyBites, we believe that eating healthy does not have to be boring. Our mission is to inspire healthy eating habits with flavorful recipes that make you feel good inside and out.</p>
+    </section>
+	<button id="open1"></button>
+
+	<!-- Overlay and Popup Box -->
+	<div class="overlay1" id="overla1y"></div>
+	<div class="popup-box1" id="popupBox1">
+	  <p style="color: rgb(242, 226, 226); font-family: 'Times New Roman', Times, serif; font-size: 30px;">Choose your RECIPES here:</p>
+	  <div class="reference-links">
+		<a href="receipes/apple donut/index.html" target="">Recipe 1</a>
+		<a href="receipes/banana/index.html" target="">Recipe 2</a>
+		<a href="receipes/chickpea/index.html" target="">Recipe 3</a>
+		<a href="receipes/turmeric late/index.html" target="">Recipe 4</a>
+		<a href="receipes/mushroom soup/index.html" target="">Recipe 5</a>
+		<a href="receipes/easy pasta/index.html" target="">Recipe 6</a>
+        <a href="receipes/oats/index.html" target="">Recipe 7</a>
+		
+	  </div>
+	  <button class="close-btn1" id="closePopupBtn1">Close</button>
+	</div>
+	<button id="open2"></button>
+
+	<!-- Overlay and Popup Box -->
+	<div class="overlay2" id="overlay2"></div>
+	<div class="popup-box2" id="popupBox2">
+	  <p style="color: rgb(242, 226, 226); font-family: 'Times New Roman', Times, serif; font-size: 30px;">Choose your RECIPES here:</p>
+	  <div class="reference-links">
+		<a href="receipes/bhindi/index.html" target="">Recipe 1</a>
+		<a href="receipes/brocalli/index.html" target="">Recipe 2</a>
+		<a href="receipes/methi thepla/index.html" target="">Recipe 3</a>
+		<a href="receipes/omlette/index2.html" target="">Recipe 4</a>
+		<a href="receipes/palk paneer/index.html" target="">Recipe 5</a>
+		<a href="receipes/thai noodles/index.html" target="">Recipe 6</a>
+        <a href="receipes/mlai klofta/index.html" target="">Recipe 7</a>
+	  </div>
+	  <button class="close-btn2" id="closePopupBtn2">Close</button>
+	</div>
+	<button id="open3"></button>
+
+	<!-- Overlay and Popup Box -->
+	<div class="overlay3" id="overlay3"></div>
+	<div class="popup-box3" id="popupBox3">
+	  <p style="color: rgb(242, 226, 226); font-family: 'Times New Roman', Times, serif; font-size: 30px;">Choose your RECIPES here:</p>
+	  <div class="reference-links">
+		<a href="receipes/healthy smooth/index.html" target="">Recipe 1</a>
+		<a href="receipes/raspberry bites/index.html" target="">Recipe 2</a>
+		<a href="receipes/berry almnd smooth/index.html" target="">Recipe 3</a>
+		<a href="receipes/potato pie/index.html" target="">Recipe 4</a>
+		<a href="receipes/purple smoothie/index.html" target="">Recipe 5</a>
+		<a href="receipes/pumpkin ice/index.html" target="">Recipe 6</a>
+	  </div>
+	  <button class="close-btn3" id="closePopupBtn3">Close</button>
+	</div>
+	<script>
+		// Get elements
+		// Get elements
+		const open1 = document.getElementById('open1');
+		// Get elements
+		const open2 = document.getElementById('open2');
+		const open3 = document.getElementById('open3');
+		const closePopupBtn1 = document.getElementById('closePopupBtn1');
+        const closePopupBtn2 = document.getElementById('closePopupBtn2');
+        const closePopupBtn3 = document.getElementById('closePopupBtn3');
+		const popupBox1 = document.getElementById('popupBox1');
+		const overlay1 = document.getElementById('overlay1');
+        const popupBox2 = document.getElementById('popupBox2');
+		const overlay2 = document.getElementById('overlay2');
+        const popupBox3 = document.getElementById('popupBox3');
+		const overlay3 = document.getElementById('overlay3');
+	
+		// Open popup
+		open1.addEventListener('click', () => {
+		  popupBox1.style.display = 'block';
+		  overlay1.style.display = 'block';
+		});
+		open2.addEventListener('click', () => {
+		  popupBox2.style.display = 'block';
+		  overlay2.style.display = 'block';
+		});
+		open3.addEventListener('click', () => {
+		  popupBox3.style.display = 'block';
+		  overlay3.style.display = 'block';
+		});
+	
+		// Close popup
+		closePopupBtn1.addEventListener('click', () => {
+		  popupBox1.style.display = 'none';
+		  overlay1.style.display = 'none';
+		});
+	
+		// Close popup when clicking on the overlay
+		overlay1.addEventListener('click', () => {
+		  popupBox1.style.display = 'none';
+		  overlay1.style.display = 'none';
+		});
+        
+
+
+       
+	
+		// Close popup
+		closePopupBtn2.addEventListener('click', () => {
+		  popupBox2.style.display = 'none';
+		  overlay2.style.display = 'none';
+		});
+	
+		// Close popup when clicking on the overlay
+		overlay2.addEventListener('click', () => {
+		  popupBox2.style.display = 'none';
+		  overlay2.style.display = 'none';
+		});
+
+
+
+       
+	
+		// Close popup
+		closePopupBtn3.addEventListener('click', () => {
+		  popupBox3.style.display = 'none';
+		  overlay3.style.display = 'none';
+		});
+	
+		// Close popup when clicking on the overlay
+		overlay3.addEventListener('click', () => {
+		  popupBox3.style.display = 'none';
+		  overlay3.style.display = 'none';
+		});
+	
+		// To connect the popup to an already existing button on your website:
+		// Replace 'openPopupBtn' with the ID of your existing button.
+		// For example: document.getElementById('yourExistingButtonID')
+	  </script>
+	</body>
+	</html>
+	
+
+  
